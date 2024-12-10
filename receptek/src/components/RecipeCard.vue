@@ -20,6 +20,10 @@ defineProps({
       </div>
       <button type="button">Részletek</button>
     </div>
+<<<<<<< Updated upstream
+=======
+    <button type="button">Részletek</button>
+>>>>>>> Stashed changes
   </div>
 </template>
 
