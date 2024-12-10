@@ -29,24 +29,40 @@ const filteredRecipies = computed(() => {
 </script>
 
 <template>
-  <div>
-    <input v-model="searchQuery" type="text" placeholder="Keresés receptek között..." />
-    <br />
-    <select v-model="difficultyFilter">
-      <option value="">Minden nehézség</option>
-      <option value="könnyű">Könnyű</option>
-      <option value="közepes">Közepes</option>
-      <option value="nehéz">Nehéz</option>
-    </select>
-    <br />
-    <select v-model="sortOption">
-      <option value="cookTime">Elkészítési idő</option>
-      <option value="name">Név</option>
-    </select>
-    <br />
-    <RecipieCard :recipies="filteredRecipies" />
-  </div>
+  <ul>
+    <li><a href="#">Receptköny</a></li>
+    <li><a href="#">Receptek</a></li>
+    <li><a href="#">Új receptek</a></li>
+    <li><a href="#">Kedvencek</a></li>
+  </ul>
+      <input v-model="searchQuery" type="text" placeholder="Keresés receptek között..." />
+      <select v-model="difficultyFilter">
+        <option value="">Minden nehézség</option>
+        <option value="könnyű">Könnyű</option>
+        <option value="közepes">Közepes</option>
+        <option value="nehéz">Nehéz</option>
+      </select>
+      <select v-model="sortOption">
+        <option value="cookTime">Elkészítési idő</option>
+        <option value="name">Név</option>
+      </select>
+      <RecipieCard :recipies="filteredRecipies" />
 </template>
 
 <style scoped>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 8px;
+}
 </style>
