@@ -5,7 +5,7 @@ import { recipies as allRecipies } from './data/dummyData';
 
 const searchQuery = ref('');
 const difficultyFilter = ref('');
-const sortOption = ref('');
+const sortOption = ref('cookTime');
 
 const filteredRecipies = computed(() => {
   let filtered = allRecipies.filter((recipie) =>
