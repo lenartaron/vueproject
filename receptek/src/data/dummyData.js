@@ -5,6 +5,7 @@ export const recipies = [
         cookTime: 45,
         difficulty: 'könnyű',
         img: new URL('../assets/paprikaskrumpli.jpg', import.meta.url).href
+
     },
     {
         id: 2,
