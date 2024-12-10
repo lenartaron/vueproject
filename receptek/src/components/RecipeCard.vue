@@ -10,12 +10,12 @@ const getImageURL = (imageURL) => {
 
 </script>
 <template>
-  <div class="card h-100">
-    <img :src="getImageURL(product.img)"><br>
-    <h2>{{ recipies.name }}</h2><br>
-    <p>Elkészítési idő: {{ recipies.cookTime }} perc</p>
+  <div class="card h-100" v-for="recipie in recipies">
+    <img :src="recipie.img" alt="Image of {{ recipie.name }}"><br>
+    <h2>{{ recipie.name }}</h2><br>
+    <p>Elkészítési idő: {{ recipie.cookTime }} perc</p>
     <div class="diff">
-      <p>{{ recipies.difficulty }}</p>
+      <p>{{ recipie.difficulty }}</p>
     </div>
     <button type="button">Részletek</button>
 
