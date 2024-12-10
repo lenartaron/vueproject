@@ -35,17 +35,7 @@ const filteredRecipies = computed(() => {
     <li><a href="#">Új receptek</a></li>
     <li><a href="#">Kedvencek</a></li>
   </ul>
-      <input v-model="searchQuery" type="text" placeholder="Keresés receptek között..." />
-      <select v-model="difficultyFilter">
-        <option value="">Minden nehézség</option>
-        <option value="könnyű">Könnyű</option>
-        <option value="közepes">Közepes</option>
-        <option value="nehéz">Nehéz</option>
-      </select>
-      <select v-model="sortOption">
-        <option value="cookTime">Elkészítési idő</option>
-        <option value="name">Név</option>
-      </select>
+      
       <RecipieCard :recipies="filteredRecipies" />
 </template>
 
