@@ -35,7 +35,6 @@ const filteredRecipies = computed(() => {
     <li><a href="#">Új receptek</a></li>
     <li><a href="#">Kedvencek</a></li>
   </ul>
-      
       <RecipieCard :recipies="filteredRecipies" />
 </template>
 
