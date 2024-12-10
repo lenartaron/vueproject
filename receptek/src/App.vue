@@ -51,9 +51,29 @@ const switchView = (view) => {
     <li><a href="#" @click.prevent="switchView('new')">Új receptek</a></li>
     <li><a href="#">Kedvencek</a></li>
   </ul>
+
   <div v-if="currentView === 'recipes'">
+    <div class="filters">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Keresés receptek között..."
+      />
+      <select v-model="difficultyFilter">
+        <option value="">Minden nehézség</option>
+        <option value="könnyű">Könnyű</option>
+        <option value="közepes">Közepes</option>
+        <option value="nehéz">Nehéz</option>
+      </select>
+      <select v-model="sortOption">
+        <option value="cookTime">Elkészítési idő</option>
+        <option value="name">Név</option>
+      </select>
+    </div>
+
     <RecipieCard :recipies="filteredRecipies" />
   </div>
+
   <div v-if="currentView === 'new'">
     <NewRecipe @add-recipe="addNewRecipe" />
   </div>
@@ -79,5 +99,15 @@ li a {
 
 li a:hover {
   background-color: #ddd;
+}
+
+.filters {
+  margin: 15px 0;
+  display: flex;
+  gap: 10px;
+}
+
+input, select {
+  padding: 5px;
 }
 </style>
