@@ -33,6 +33,19 @@ defineProps({
 </template>
 
 <style scoped>
+
+.bg-success {
+  background-color: #279769;
+}
+
+.bg-warning {
+  background-color: #FBC50D;
+}
+
+.bg-danger {
+  background-color: #E0464E;
+}
+
 .card-img-top {
   width: 100%;
   height: 200px;
@@ -47,5 +60,7 @@ defineProps({
 .badge {
   font-size: 14px;
   padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
 }
 </style>
