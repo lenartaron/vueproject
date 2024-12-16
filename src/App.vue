@@ -15,18 +15,19 @@ const addNewRecipe = (newRecipe) => {
     id: dummyRecipies.length + localRecipes.value.length + 1,
     ...newRecipe,
   });
+  switchView('recipes');
 };
 
 const filteredRecipies = computed(() => {
   const allRecipes = [...dummyRecipies, ...localRecipes.value];
 
-  let filtered = allRecipes.filter((recipie) =>
-    recipie.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  let filtered = allRecipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 
   if (difficultyFilter.value) {
-    filtered = filtered.filter((recipie) =>
-      recipie.difficulty.toLowerCase() === difficultyFilter.value.toLowerCase()
+    filtered = filtered.filter((recipe) =>
+      recipe.difficulty.toLowerCase() === difficultyFilter.value.toLowerCase()
     );
   }
 
@@ -36,62 +37,63 @@ const filteredRecipies = computed(() => {
     filtered.sort((a, b) => a.name.localeCompare(b.name));
   }
 
+  console.log('Filtered Recipes:', filtered);
   return filtered;
 });
 
 const switchView = (view) => {
   currentView.value = view;
 };
+
+if (!currentView.value) {
+  currentView.value = 'recipes';
+}
 </script>
 
 <template>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div v-if="currentView === 'recipes'">
+          <ul class="list-unstyled d-flex mb-3">
+            <li class="me-3"><a href="#" @click.prevent="switchView('recipes')"><strong>Receptkönyv</strong></a></li>
+            <li class="me-3"><a href="#" @click.prevent="switchView('recipes')">Receptek</a></li>
+            <li class="me-3"><a href="#" @click.prevent="switchView('new')">Új receptek</a></li>
+            <li><a href="#">Kedvencek</a></li>
+          </ul>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div v-if="currentView === 'recipes'">
-        <ul class="list-unstyled d-flex mb-3">
-          <li class="me-3"><a href="#" @click.prevent="switchView('recipes')"><strong>Receptkönyv</strong></a></li>
-          <li class="me-3"><a href="#" @click.prevent="switchView('recipes')">Receptek</a></li>
-          <li class="me-3"><a href="#" @click.prevent="switchView('new')">Új receptek</a></li>
-          <li><a href="#">Kedvencek</a></li>
-        </ul>
+          <div class="filters d-flex align-items-center">
+            <input v-model="searchQuery" type="text" class="form-control me-2 col-md-12" id="search"
+              placeholder="Keresés receptek között..." />
+            <select v-model="difficultyFilter" class="form-select me-2 col-md-5">
+              <option value="">Minden nehézség</option>
+              <option value="könnyű">Könnyű</option>
+              <option value="közepes">Közepes</option>
+              <option value="nehéz">Nehéz</option>
+            </select>
+            <select v-model="sortOption" class="form-select col-md-5">
+              <option value="cookTime">Elkészítési idő</option>
+              <option value="name">Név</option>
+            </select>
+          </div>
 
-        <div class="filters d-flex align-items-center">
-          <input
-            v-model="searchQuery"
-            type="text"
-            class="form-control me-2 col-md-12"
-            id="search"
-            placeholder="Keresés receptek között..."
-          />
-          <select v-model="difficultyFilter" class="form-select me-2 col-md-5">
-            <option value="">Minden nehézség</option>
-            <option value="könnyű">Könnyű</option>
-            <option value="közepes">Közepes</option>
-            <option value="nehéz">Nehéz</option>
-          </select>
-          <select v-model="sortOption" class="form-select col-md-5">
-            <option value="cookTime">Elkészítési idő</option>
-            <option value="name">Név</option>
-          </select>
+          <div v-if="filteredRecipies.length === 0" class="mt-3">
+            <p>Nincs találat</p>
+          </div>
+          <div v-else>
+            <div v-for="recipe in filteredRecipies" :key="recipe.id">
+              <RecipieCard :recipe="recipe" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-
-
-    <RecipieCard :recipies="filteredRecipies" />
-
-
-  <div v-if="currentView === 'new'">
-    <NewRecipe @add-recipe="addNewRecipe" />
+    <div v-if="currentView === 'new'">
+      <NewRecipe @add-recipe="addNewRecipe" />
+    </div>
   </div>
 </template>
-
 <style scoped>
 ul {
   list-style-type: none;
@@ -122,7 +124,8 @@ li a:hover {
   gap: 10px;
 }
 
-input, select {
+input,
+select {
   padding: 5px;
 }
 </style>

@@ -2,35 +2,30 @@
 import { defineProps } from 'vue';
 
 defineProps({
-  recipies: {
-    type: Array,
+  recipe: { // Accepts a single recipe object instead of "recipies"
+    type: Object,
     required: true,
   },
 });
 </script>
 
 <template>
-<div class="container">
-  <div class="row">
-    <div class="col-md-4" v-for="recipie in recipies" :key="recipie.id">
-      <div class="card h-100">
-        <img :src="recipie.img" alt="Image of {{ recipie.name }}" class="card-img-top" />
-        <div class="card-body">
-          <h5 class="card-title">{{ recipie.name }}</h5>
-          <p class="card-text">Elkészítési idő: {{ recipie.cookTime }} perc</p>
-          <div class="diff">
-            <p>{{ recipie.difficulty }}</p>
-          </div>
-          <button type="button" class="btn btn-primary">Részletek</button>
+  <div class="container">
+    <div class="card h-100">
+      <img :src="recipe.img" alt="Image of {{ recipe.name }}" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.name }}</h5>
+        <p class="card-text">Elkészítési idő: {{ recipe.cookTime }} perc</p>
+        <div class="diff">
+          <p>{{ recipe.difficulty }}</p>
         </div>
+        <button type="button" class="btn btn-primary">Részletek</button>
       </div>
     </div>
   </div>
-</div>
-
 </template>
-<style scoped>
 
+<style scoped>
 img {
   height: 200px;
   width: 300px;
@@ -44,7 +39,4 @@ img {
 .card:hover {
   box-shadow: 1px 1px 10px dimgray;
 }
-
-
-
 </style>

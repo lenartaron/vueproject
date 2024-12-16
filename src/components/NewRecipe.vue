@@ -26,9 +26,12 @@ const submitRecipe = () => {
     message.value = 'Töltsd ki az összes mezőt!';
   }
 };
+
+const goToHomePage = () => {
+  window.location.href = '/';
+};
 </script>
 
-newRecipe.cookTime
 <template>
   <form @submit.prevent="submitRecipe" class="container mt-4 text-center">
     <div class="mb-3">
@@ -56,18 +59,16 @@ newRecipe.cookTime
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add Recipe</button>
+    <div class="d-flex justify-content-center gap-3">
+      <button type="submit" class="btn btn-primary">Add Recipe</button>
+      <button type="button" class="btn btn-secondary" @click="goToHomePage">Vissza a főoldalra</button>
+    </div>
   </form>
 
   <div v-if="message" class="mt-3 alert" :class="message.includes('Sikeresen') ? 'alert-success' : 'alert-danger'">
     {{ message }}
   </div>
-
-
-
-
 </template>
-
 
 <style scoped>
 .alert {
@@ -86,6 +87,4 @@ newRecipe.cookTime
   color: red;
   background-color: #f8d7da;
 }
-
-
 </style>
