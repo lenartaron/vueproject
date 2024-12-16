@@ -57,6 +57,10 @@ defineProps({
   border-radius: 10px;
 }
 
+.card:hover {
+  box-shadow: 1px 1px 10px #000;
+}
+
 .badge {
   font-size: 14px;
   padding: 5px 10px;
