@@ -45,34 +45,47 @@ const switchView = (view) => {
 </script>
 
 <template>
-  <ul>
-    <li><a href="#" @click.prevent="switchView('recipes')">Receptköny</a></li>
-    <li><a href="#" @click.prevent="switchView('recipes')">Receptek</a></li>
-    <li><a href="#" @click.prevent="switchView('new')">Új receptek</a></li>
-    <li><a href="#">Kedvencek</a></li>
-  </ul>
 
-  <div v-if="currentView === 'recipes'">
-    <div class="filters">
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="Keresés receptek között..."
-      />
-      <select v-model="difficultyFilter">
-        <option value="">Minden nehézség</option>
-        <option value="könnyű">Könnyű</option>
-        <option value="közepes">Közepes</option>
-        <option value="nehéz">Nehéz</option>
-      </select>
-      <select v-model="sortOption">
-        <option value="cookTime">Elkészítési idő</option>
-        <option value="name">Név</option>
-      </select>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div v-if="currentView === 'recipes'">
+        <ul class="list-unstyled d-flex mb-3">
+          <li class="me-3"><a href="#" @click.prevent="switchView('recipes')"><strong>Receptkönyv</strong></a></li>
+          <li class="me-3"><a href="#" @click.prevent="switchView('recipes')">Receptek</a></li>
+          <li class="me-3"><a href="#" @click.prevent="switchView('new')">Új receptek</a></li>
+          <li><a href="#">Kedvencek</a></li>
+        </ul>
+
+        <div class="filters d-flex align-items-center">
+          <input
+            v-model="searchQuery"
+            type="text"
+            class="form-control me-2 col-md-12"
+            id="search"
+            placeholder="Keresés receptek között..."
+          />
+          <select v-model="difficultyFilter" class="form-select me-2 col-md-5">
+            <option value="">Minden nehézség</option>
+            <option value="könnyű">Könnyű</option>
+            <option value="közepes">Közepes</option>
+            <option value="nehéz">Nehéz</option>
+          </select>
+          <select v-model="sortOption" class="form-select col-md-5">
+            <option value="cookTime">Elkészítési idő</option>
+            <option value="name">Név</option>
+          </select>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+
+
 
     <RecipieCard :recipies="filteredRecipies" />
-  </div>
+
 
   <div v-if="currentView === 'new'">
     <NewRecipe @add-recipe="addNewRecipe" />
@@ -95,6 +108,8 @@ li a {
   display: block;
   padding: 8px;
   cursor: pointer;
+  font-size: medium;
+  color: dimgray;
 }
 
 li a:hover {

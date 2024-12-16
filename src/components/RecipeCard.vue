@@ -41,6 +41,9 @@ img {
   border-radius: 10px;
 }
 
+.card:hover {
+  box-shadow: 1px 1px 10px dimgray;
+}
 
 
 
