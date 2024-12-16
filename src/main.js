@@ -1,3 +1,4 @@
+console.log('Main.js loaded successfully');
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
